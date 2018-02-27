@@ -1,13 +1,12 @@
-# Project Name
-
-> Project description
+# Menu Component
+> This is the menu component for a copy app of OpenTable.com. 
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/fullstack-flapjacks/review-service
+  - https://github.com/fullstack-flapjacks/suggested-restaurants
+  - https://github.com/fullstack-flapjacks/reservations
+  - https://github.com/fullstack-flapjacks/About_Map_Info-module
 
 ## Table of Contents
 
