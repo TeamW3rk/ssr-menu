@@ -1,5 +1,5 @@
 # Menu Component
-> This is the menu component for a copy app of OpenTable.com. 
+> The menu component for Fullstack Flapjack's OpenTable restaurant page clone.
 
 ## Related Projects
 
