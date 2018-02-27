@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const faker = require("faker");
+const Promise = require("bluebird");
 const sequelize = new Sequelize("menus", "Joe", "", {
   host: "localhost",
   port: 5554,
@@ -25,13 +26,13 @@ const MenuItems = sequelize.define("MenuItems", {
   categoryId: Sequelize.INTEGER
 });
 
-//one to many
-RestaurantMenu.hasMany(MenuCategories, { foreignKey: "menuId" });
-MenuCategories.belongsTo(RestaurantMenu, { foreignKey: "menuId" });
+// //one to many
+// RestaurantMenu.hasMany(MenuCategories, { foreignKey: "menuId" });
+// MenuCategories.belongsTo(RestaurantMenu, { foreignKey: "menuId" });
 
-//one to many
-MenuCategories.hasMany(MenuItems, { foreignKey: "categoryId" });
-MenuItems.belongsTo(MenuCategories, { foreignKey: "categoryId" });
+// //one to many
+// MenuCategories.hasMany(MenuItems, { foreignKey: "categoryId" });
+// MenuItems.belongsTo(MenuCategories, { foreignKey: "categoryId" });
 
 /////////////////////////////////
 
