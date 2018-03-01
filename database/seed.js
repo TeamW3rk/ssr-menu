@@ -36,7 +36,7 @@ sequelize
 .then(function() {
   for (var i = 1; i <= 200; i++) {
     for (var j = 0; j < menus.length; j++) {
-      for (var k = 1; k < 10; k++) {
+      for (var k = 1; k <= 10; k++) {
         RestaurantMenuItems.create({
           restaurantId: i,
           menuCategoryName: menus[j],
