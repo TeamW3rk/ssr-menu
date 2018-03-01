@@ -4,8 +4,18 @@ const app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/:id/menu", (req, res) => {
 
+  let id = req.params.id;
+
+  if (0 < id && id < 201) {
+    db.fetch(id, (data) => res.send(data));
+  } else {
+    res.status(404);
+    res.send('No such restaurant ID');
+  }
+});
+  
 let port = 6600;
 
 app.listen(port, () => console.log(`Server is listening on ${port}`));

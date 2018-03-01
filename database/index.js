@@ -16,11 +16,13 @@ const RestaurantMenuItems = sequelize.define("RestaurantMenuItems", {
 
 let fetchRestaurantMenuItems = function(id, cb) {
    RestaurantMenuItems.findAll({
-    restaurantId: id
+    where: {
+      restaurantId: id
+    }
   })
-  .then(data => cb(data))
-  .catch(err => err)
-}
+  .then((data) => cb(data))
+  .catch((err) => {throw err});
+};
 
 module.exports = {
   fetch: fetchRestaurantMenuItems
