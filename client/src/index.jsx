@@ -61,11 +61,10 @@ class App extends React.Component {
     //update state with whatever menu was selected
     // console.log(menu,'was clicked!')
     let selectedMenu = this.handleMenuChange(menu);
-
     this.setState({
       selectedMenu: selectedMenu
-    })
-    console.log(this.state.selectedMenu)
+    });
+    console.log(menu);
   }
   
 

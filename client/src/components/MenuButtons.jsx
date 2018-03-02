@@ -7,12 +7,11 @@ class MenuButtons extends React.Component {
     this.state = {
       selectedMenu: ''
     }
-    this.handleMenuClick = this.handleMenuClick.bind(this);
+    //this.handleMenuClick = this.handleMenuClick.bind(this);
   }
 
   handleMenuClick(menu) {
-    this.setState({ selectedMenu: menu });
-    this.props.menuClick(this.state.selectedMenu);
+   this.props.menuClick(menu);
   }
 
   render() {
