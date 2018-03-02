@@ -40,12 +40,12 @@ sequelize
 .then(function() {
   for (var i = 1; i <= 200; i++) {
     for (var j = 0; j < menus.length; j++) {
-      for (var k = 1; k <= 10; k++) {
+      for (var k = 1; k <= 20; k++) {
         RestaurantMenuItems.create({
           restaurantId: i,
           menuCategoryName: menus[j],
           menuItemName: capitalizeFirstLetter(faker.lorem.word()),
-          menuItemDescription: faker.lorem.sentence(),
+          menuItemDescription: faker.lorem.sentence().toLowerCase(),
           menuItemPrice: getRandomPrice()
         })
       }

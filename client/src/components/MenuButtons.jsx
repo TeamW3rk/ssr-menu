@@ -4,10 +4,6 @@ import ReactDom from 'react-dom';
 class MenuButtons extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedMenu: ''
-    }
-    //this.handleMenuClick = this.handleMenuClick.bind(this);
   }
 
   handleMenuClick(menu) {
