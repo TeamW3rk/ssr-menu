@@ -10,7 +10,8 @@ class App extends React.Component {
     this.state = {
       restaurantMenuItems: [],
       restaurantID: 1,
-      selectedMenu: []
+      selectedMenu: [],
+      updatedAt: ''
     }
     this.handleMenuClick = this.handleMenuClick.bind(this);
   }
@@ -34,10 +35,13 @@ class App extends React.Component {
   fetch() {
     axios
       .get(`/${this.state.restaurantID}/menu`)
-      .then((restuarantMenu) => {
+      .then((restaurantMenu) => {
         console.log(`Restaurant ${this.state.restaurantID} data fetched`);
-        console.log(restuarantMenu.data);
-        this.setState({ restaurantMenuItems: restuarantMenu.data });
+        console.log(restaurantMenu.data);
+        this.setState({ 
+          restaurantMenuItems: restaurantMenu.data,
+          updatedAt: restaurantMenu.data[0].updatedAt.slice(0, 10)
+         });
         this.handleMenuClick("Breakfast");
       })
       .catch((error) => {
@@ -59,11 +63,8 @@ class App extends React.Component {
 
   handleMenuClick(menu) {
     //update state with whatever menu was selected
-    // console.log(menu,'was clicked!')
     let selectedMenu = this.handleMenuChange(menu);
-    this.setState({
-      selectedMenu: selectedMenu
-    });
+    this.setState({ selectedMenu: selectedMenu });
     console.log(menu);
   }
   
@@ -77,6 +78,10 @@ class App extends React.Component {
         </div>
         <div className='menu-section'>
           <MenuSection menuItems={this.state.selectedMenu}/>
+        </div>
+        <div className='footer'>
+          <span>Last updated: {this.state.updatedAt}</span> 
+          <span className='menu-provider'> Powered by -TOE JAM- </span>
         </div>
       </div>
     )
