@@ -6,9 +6,7 @@ const MenuItem = props => (
     <div className='menu-item-title'>
       {props.menuItem.menuItemName} ${props.menuItem.menuItemPrice}
     </div>
-    <div className='menu-item-desc'>
-      {props.menuItem.menuItemDescription}  
-    </div>
+      <p className='menu-item-desc'>{props.menuItem.menuItemDescription}</p>
   </div>
 );
 

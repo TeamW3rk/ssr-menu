@@ -1,0 +1,44 @@
+#app {
+  font-family: BrandonText,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+}
+
+.menu-nav {
+  margin-top: calc(-1 * 1rem);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(225, 225, 225);
+}
+.menu-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.33;
+  color: rgb(51, 51, 51);
+  border-bottom: 1px solid rgb(225, 225, 225);
+  padding-bottom: 1rem;
+  margin: 0 0 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-section {
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+  border-bottom: 1px solid rgb(225, 225, 225);
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+button {
+  font-size: 0.875rem;
+  line-height: 1.43;
+  font-weight: 500;
+  color: rgb(51, 51, 51);
+  border: 1px solid rgb(225, 225, 225);
+  border-radius: 2px;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  box-sizing: border-box;
+  margin-right: 1rem;
+  background-color: #fff;
+  margin-top: 1rem;
+}

@@ -71,7 +71,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <h2>Menu</h2>
+        <h2 className='menu-title'>Menu</h2>
         <div className='menu-nav'>
           <MenuButtons menuClick={this.handleMenuClick}/>
         </div>
