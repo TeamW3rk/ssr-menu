@@ -58,7 +58,7 @@
   font-weight: normal;
 }
 
-button {
+.menu-button {
   font-size: 0.875rem;
   line-height: 1.43;
   font-weight: 500;
@@ -92,8 +92,4 @@ button:focus {
   padding-top: 1rem;
   padding-bottom: 1rem;
   color: rgb(51, 51, 51);
-}
-
-.menu-provider {
-  float: right;
 }

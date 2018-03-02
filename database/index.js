@@ -8,6 +8,7 @@ const sequelize = new Sequelize("menus", "Joe", "", {
 
 const RestaurantMenuItems = sequelize.define("RestaurantMenuItems", {
   restaurantId: Sequelize.INTEGER,
+  menuName: Sequelize.TEXT,
   menuCategoryName: Sequelize.TEXT,
   menuItemName: Sequelize.TEXT,
   menuItemDescription: Sequelize.TEXT,

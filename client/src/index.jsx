@@ -8,8 +8,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurantMenuItems: [],
       restaurantID: 1,
+      // restaurantMenus: [],
+      // restaurantCategory: [],
+      restaurantMenuItems: [],
       selectedMenu: [],
       updatedAt: ''
     }
@@ -48,26 +50,30 @@ class App extends React.Component {
         console.log(error);
       });
   }
-
+  
+  handleMenuClick(menu) {
+    //updates state with selected menu
+    let selectedMenu = this.handleMenuChange(menu);
+    console.log(menu,'was selected');
+  }
+  
   handleMenuChange(menu) {
-    //filters restaurants menu items
+    //filters restaurants menu items to selected menu
     let restaurantMenuItems = this.state.restaurantMenuItems;
     let filteredMenu = [];
     for (let i = 0; i < restaurantMenuItems.length; i++) {
-      if (restaurantMenuItems[i].menuCategoryName === menu) {
+      if (restaurantMenuItems[i].menuName === menu) {
         filteredMenu.push(restaurantMenuItems[i]);
       }
     }
-    return filteredMenu;
+    this.setState({ selectedMenu: filteredMenu });
   }
 
-  handleMenuClick(menu) {
-    //update state with whatever menu was selected
-    let selectedMenu = this.handleMenuChange(menu);
-    this.setState({ selectedMenu: selectedMenu });
-    console.log(menu);
+  handleMenuCategory(menu) {
+    let restaurantMenuItems = this.state.restaurantMenuItems;
+
   }
-  
+
 
   render () {
     return (
@@ -81,7 +87,6 @@ class App extends React.Component {
         </div>
         <div className='footer'>
           <span>Last updated: {this.state.updatedAt}</span> 
-          <span className='menu-provider'> Powered by -TOE JAM- </span>
         </div>
       </div>
     )

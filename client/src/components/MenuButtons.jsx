@@ -11,13 +11,17 @@ class MenuButtons extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <button onClick={() => this.handleMenuClick("Breakfast")}>Breakfast Menu</button>
-        <button onClick={() => this.handleMenuClick('Lunch')}>Lunch Menu</button>
-        <button onClick={() => this.handleMenuClick('Dinner')}>Dinner Menu</button>
-      </div>
-    )
+    return <div>
+        <button className="menu-button" onClick={() => this.handleMenuClick("Breakfast")}>
+          Breakfast Menu
+        </button>
+        <button className="menu-button" onClick={() => this.handleMenuClick("Lunch")}>
+          Lunch Menu
+        </button>
+        <button className="menu-button" onClick={() => this.handleMenuClick("Dinner")}>
+          Dinner Menu
+        </button>
+      </div>;
   }
 }
 
