@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 const MenuItem = props => (
   <div className="menu-item">
     <div className='menu-item-title'>
-      {props.menuItem.menuItemName.toUpperCase()} 
+      {props.menuItem.menuItemName} 
       <div className='menu-item-price'>
         ${props.menuItem.menuItemPrice}     
       </div>

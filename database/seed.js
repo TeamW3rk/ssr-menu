@@ -29,6 +29,10 @@ let getRandomPrice = function() {
   return int;
 };
 
+let capitalizeFirstLetter = function(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 sequelize
 .sync({
   force: true
@@ -40,7 +44,7 @@ sequelize
         RestaurantMenuItems.create({
           restaurantId: i,
           menuCategoryName: menus[j],
-          menuItemName: faker.lorem.word(),
+          menuItemName: capitalizeFirstLetter(faker.lorem.word()),
           menuItemDescription: faker.lorem.sentence(),
           menuItemPrice: getRandomPrice()
         })
