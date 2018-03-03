@@ -9,13 +9,16 @@ const sequelize = new Sequelize("menus", "Joe", "", {
 
 const RestaurantMenuItems = sequelize.define("RestaurantMenuItems", {
   restaurantId: Sequelize.INTEGER,
+  menuName: Sequelize.TEXT,
   menuCategoryName: Sequelize.TEXT,
   menuItemName: Sequelize.TEXT,
   menuItemDescription: Sequelize.TEXT,
   menuItemPrice: Sequelize.DECIMAL
 })
 
-let menus = ['Breakfast', 'Lunch', 'Dinner'];
+let menuNames = ['Breakfast', 'Lunch', 'Dinner'];
+
+let menuCategoryNames = ['Appetizers', 'Mains', 'Sides', 'Beverages'];
 
 let getRandomIntInclusive = function(min, max) {
   min = Math.ceil(min);
@@ -29,21 +32,28 @@ let getRandomPrice = function() {
   return int;
 };
 
+let capitalizeFirstLetter = function(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 sequelize
 .sync({
   force: true
 })
 .then(function() {
-  for (var i = 1; i <= 200; i++) {
-    for (var j = 0; j < menus.length; j++) {
-      for (var k = 1; k <= 10; k++) {
-        RestaurantMenuItems.create({
-          restaurantId: i,
-          menuCategoryName: menus[j],
-          menuItemName: faker.lorem.word(),
-          menuItemDescription: faker.lorem.sentence(),
-          menuItemPrice: getRandomPrice()
-        })
+  for (let i = 1; i <= 200; i++) {
+    for (let j = 0; j < menuNames.length; j++) {
+      for (let k = 0; k < menuCategoryNames.length; k++) {
+        for (let l = 1; l <= getRandomIntInclusive(5,10); l++) {
+          RestaurantMenuItems.create({
+            restaurantId: i,
+            menuName: menuNames[j],
+            menuCategoryName: menuCategoryNames[k],
+            menuItemName: capitalizeFirstLetter(faker.lorem.words()),
+            menuItemDescription: faker.lorem.sentence().toLowerCase(),
+            menuItemPrice: getRandomPrice()
+          })
+        }
       }
     }
   }
@@ -69,14 +79,14 @@ sequelize
 // });
 
 // //one to many
-// RestaurantMenu.hasMany(MenuCategories, { foreignKey: "menuId" });
-// MenuCategories.belongsTo(RestaurantMenu, { foreignKey: "menuId" });
+// RestaurantMenu.hasMany(MenuCategories, { foreignKey: "menuId", sourceKey: "id"});
+// MenuCategories.belongsTo(RestaurantMenu, { foreignKey: "menuId", targetKey: "id" });
 
-// // //one to many
-// MenuCategories.hasMany(MenuItems, { foreignKey: "categoryId" });
+// //one to many
+// MenuCategories.hasMany(MenuItems, { foreignKey: "categoryId", sourceKey: "id" });
 // MenuItems.belongsTo(MenuCategories, { foreignKey: "categoryId" });
 
-// for (var i = 0; i < 5; i++) {
+// for (var i = 1; i < 201; i++) {
 //   for (var j = 0; j < 3; j++) {
 //     RestaurantMenu.create({
 //       menuName: menus[j],

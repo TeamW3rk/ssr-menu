@@ -6,10 +6,10 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.get("/:id/menu", (req, res) => {
 
-  let id = req.params.id;
+  const id = req.params.id;
 
   if (0 < id && id < 201) {
-    db.fetch(id, (data) => res.send(data));
+    db.fetch(id, (data) => res.send(JSON.stringify(data)));
   } else {
     res.status(404);
     res.send('No such restaurant ID');
