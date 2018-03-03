@@ -17,15 +17,11 @@
 }
 
 .menu-title {
-  font-size: 1.5rem;
-  font-weight: bold;
   line-height: 1.33;
   color: rgb(51, 51, 51);
   border-bottom: 1px solid rgb(225, 225, 225);
   padding-bottom: 1rem;
   margin: 0 0 1rem;
-  display: flex;
-  justify-content: space-between;
 }
 
 #menu-category-title {
@@ -41,7 +37,6 @@
   padding-top: 1rem;
   border-bottom: 1px solid rgb(225, 225, 225);
   margin: 0;
-  -webkit-box-direction: reverse;
   display: block;
   column-count: 2;
   column-gap: 2rem;

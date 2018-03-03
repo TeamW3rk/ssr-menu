@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const db = require("../database/index.js");
-const app = express();
 const router = express.Router();
 
 router.use("/:id", express.static(path.join(__dirname + "/../client/dist")));
@@ -18,6 +17,5 @@ router.get("/:id/menu", (req, res) => {
 router.get("*", (req, res) => {
   res.status(404).send("Invalid URL");
 });
-
 
 module.exports = router;

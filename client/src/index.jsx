@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurantID: 1,
+      restaurantID: '',
       restaurantMenus: ['Breakfast', 'Lunch', 'Dinner'],
       restaurantMenuCategories: ['Appetizers', 'Mains', 'Sides', 'Beverages'],
       restaurantMenuItems: [],
@@ -19,28 +19,28 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.getRandomID();
+    this.handleRestaurantID();
   }
   
   componentDidMount() {
     this.fetch();
   }
 
-  getRandomID() {
-    let num =  Math.floor(Math.random() * (200)) + 1;
-    console.log('Restautrant ID: ',num);
+  handleRestaurantID() {
+    //grabs id from url
+    let id = window.location.pathname;
     this.setState({
-      restaurantID: num 
-    })
-  };
+      restaurantID: id
+    });
+  }
 
   fetch() {
+    //fetches data associated with id
     axios
-      .get(`/r/${this.state.restaurantID}/menu`)
+      .get(`${this.state.restaurantID}menu`)
       .then((restaurantMenu) => {
         console.log(`Restaurant ${this.state.restaurantID} data fetched`);
         console.log(restaurantMenu.data);
-
         this.setState({ 
           restaurantMenuItems: restaurantMenu.data,
           updatedAt: restaurantMenu.data[0].updatedAt.slice(0, 10)
