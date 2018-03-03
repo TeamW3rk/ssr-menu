@@ -9,8 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       restaurantID: 1,
-      // restaurantMenus: [],
-      // restaurantCategory: [],
+      restaurantMenuCategories: ['Appetizers', 'Mains', 'Sides', 'Beverages'],
       restaurantMenuItems: [],
       selectedMenu: [],
       updatedAt: ''
@@ -40,40 +39,59 @@ class App extends React.Component {
       .then((restaurantMenu) => {
         console.log(`Restaurant ${this.state.restaurantID} data fetched`);
         console.log(restaurantMenu.data);
+
         this.setState({ 
           restaurantMenuItems: restaurantMenu.data,
           updatedAt: restaurantMenu.data[0].updatedAt.slice(0, 10)
          });
+         //first menu to show on load
         this.handleMenuClick("Breakfast");
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  handleMenuState(organizedMenu) {
+    this.setState({ selectedMenu: organizedMenu });
+  }
   
   handleMenuClick(menu) {
     //updates state with selected menu
-    let selectedMenu = this.handleMenuChange(menu);
+    let callback = this.handleMenuState.bind(this);
+    let selectedMenu = this.filterRestaurantData(menu, callback);
     console.log(menu,'was selected');
   }
   
-  handleMenuChange(menu) {
+  filterRestaurantData(menu, cb) {
     //filters restaurants menu items to selected menu
     let restaurantMenuItems = this.state.restaurantMenuItems;
     let filteredMenu = [];
+
     for (let i = 0; i < restaurantMenuItems.length; i++) {
       if (restaurantMenuItems[i].menuName === menu) {
         filteredMenu.push(restaurantMenuItems[i]);
       }
     }
-    this.setState({ selectedMenu: filteredMenu });
+    this.organizeMenuData(filteredMenu, cb);
   }
 
-  handleMenuCategory(menu) {
-    let restaurantMenuItems = this.state.restaurantMenuItems;
+  organizeMenuData(menu, cb) {
+    //orders filted menu list by category name
+    let restaurantMenu = [];
+    let categoryNames = this.state.restaurantMenuCategories;
 
+    for (let x = 0; x < categoryNames.length; x++) {
+      let category = [];
+      for (let y = 0; y < menu.length; y++) {
+        if (menu[y].menuCategoryName === categoryNames[x]) {
+          category.push(menu[y]);
+        }
+      }
+      restaurantMenu.push(category);
+    }
+    cb(restaurantMenu);
   }
-
 
   render () {
     return (
@@ -83,7 +101,7 @@ class App extends React.Component {
           <MenuButtons menuClick={this.handleMenuClick}/>
         </div>
         <div className='menu-section'>
-          <MenuSection menuItems={this.state.selectedMenu}/>
+          <MenuSection menuCategories={this.state.selectedMenu}/>
         </div>
         <div className='footer'>
           <span>Last updated: {this.state.updatedAt}</span> 

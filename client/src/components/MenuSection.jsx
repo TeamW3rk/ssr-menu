@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MenuItem from './MenuItem.jsx';
+import MenuCategory from './MenuCategory.jsx';
 
 const MenuSection = (props) => (
   <div>
-    {props.menuItems.map(item => 
-    <MenuItem menuItem={item}/>)}
+    {props.menuCategories.map(category => 
+      <MenuCategory menuCategory={category} />)}
   </div>
-)
+);
 
 export default MenuSection;
