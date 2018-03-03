@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       restaurantID: 1,
+      restaurantMenus: ['Breakfast', 'Lunch', 'Dinner'],
       restaurantMenuCategories: ['Appetizers', 'Mains', 'Sides', 'Beverages'],
       restaurantMenuItems: [],
       selectedMenu: [],
@@ -98,7 +99,7 @@ class App extends React.Component {
       <div>
         <h2 className='menu-title'>Menu</h2>
         <div className='menu-nav'>
-          <MenuButtons menuClick={this.handleMenuClick}/>
+          <MenuButtons menuNames={this.state.restaurantMenus} menuClick={this.handleMenuClick}/>
         </div>
         <div className='menu-section'>
           <MenuSection menuCategories={this.state.selectedMenu}/>

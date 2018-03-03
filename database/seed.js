@@ -49,7 +49,7 @@ sequelize
             restaurantId: i,
             menuName: menuNames[j],
             menuCategoryName: menuCategoryNames[k],
-            menuItemName: capitalizeFirstLetter(faker.lorem.word()),
+            menuItemName: capitalizeFirstLetter(faker.lorem.words()),
             menuItemDescription: faker.lorem.sentence().toLowerCase(),
             menuItemPrice: getRandomPrice()
           })
