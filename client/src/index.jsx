@@ -36,7 +36,7 @@ class App extends React.Component {
 
   fetch() {
     axios
-      .get(`/${this.state.restaurantID}/menu`)
+      .get(`/r/${this.state.restaurantID}/menu`)
       .then((restaurantMenu) => {
         console.log(`Restaurant ${this.state.restaurantID} data fetched`);
         console.log(restaurantMenu.data);

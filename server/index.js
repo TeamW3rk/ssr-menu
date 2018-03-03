@@ -1,19 +1,14 @@
 const express = require("express");
-const db = require("../database/index");
+const path = require('path');
+const router = require('./router.js');
 const app = express();
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(path.join(__dirname + '/../client/dist')));
 
-app.get("/:id/menu", (req, res) => {
+app.use('/r', router);
 
-  const id = req.params.id;
-
-  if (0 < id && id < 201) {
-    db.fetch(id, (data) => res.send(JSON.stringify(data)));
-  } else {
-    res.status(404);
-    res.send('No such restaurant ID');
-  }
+app.get("*", (req, res) => {
+  res.status(404).send('Invalid URL');
 });
   
 let port = 6600;
