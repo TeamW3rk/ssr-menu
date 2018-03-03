@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import Button from './Button.jsx';
 
 class MenuButtons extends React.Component {
@@ -21,17 +20,6 @@ class MenuButtons extends React.Component {
           />
         ))}
       </div>;
-    //  <div>
-    //     <button className="menu-button" onClick={() => this.handleMenuClick("Breakfast")}>
-    //       Breakfast Menu
-    //     </button>
-    //     <button className="menu-button" onClick={() => this.handleMenuClick("Lunch")}>
-    //       Lunch Menu
-    //     </button>
-    //     <button className="menu-button" onClick={() => this.handleMenuClick("Dinner")}>
-    //       Dinner Menu
-    //     </button>
-    //   </div>
   }
 }
 

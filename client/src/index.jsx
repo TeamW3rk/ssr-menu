@@ -26,6 +26,25 @@ class App extends React.Component {
     this.fetch();
   }
 
+  fetch() {
+    //fetches data associated with id
+    axios
+      .get(`${this.state.restaurantID}menu`)
+      .then((restaurantMenu) => {
+        console.log(`${this.state.restaurantID} data fetched`);
+        console.log(restaurantMenu.data);
+        this.setState({ 
+          restaurantMenuItems: restaurantMenu.data,
+          updatedAt: restaurantMenu.data[0].updatedAt.slice(0, 10)
+          });
+          //first menu to show on page reload
+        this.handleMenuClick(this.state.restaurantMenus[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   handleRestaurantID() {
     //grabs id from url
     let id = window.location.pathname;
@@ -34,34 +53,15 @@ class App extends React.Component {
     });
   }
 
-  fetch() {
-    //fetches data associated with id
-    axios
-      .get(`${this.state.restaurantID}menu`)
-      .then((restaurantMenu) => {
-        console.log(`Restaurant ${this.state.restaurantID} data fetched`);
-        console.log(restaurantMenu.data);
-        this.setState({ 
-          restaurantMenuItems: restaurantMenu.data,
-          updatedAt: restaurantMenu.data[0].updatedAt.slice(0, 10)
-         });
-         //first menu to show on load
-        this.handleMenuClick("Breakfast");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   handleMenuState(organizedMenu) {
     this.setState({ selectedMenu: organizedMenu });
   }
   
   handleMenuClick(menu) {
-    //updates state with selected menu
+    //updates state with selected menu button
     let callback = this.handleMenuState.bind(this);
     let selectedMenu = this.filterRestaurantData(menu, callback);
-    console.log(menu,'was selected');
+    console.log(menu,'menu was selected');
   }
   
   filterRestaurantData(menu, cb) {
@@ -78,7 +78,7 @@ class App extends React.Component {
   }
 
   organizeMenuData(menu, cb) {
-    //orders filted menu list by category name
+    //orders filtered menu list by category name
     let restaurantMenu = [];
     let categoryNames = this.state.restaurantMenuCategories;
 
