@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const db = require('../database/index.js');
+const db = require('../database/helper.js');
 
 const router = express.Router();
 

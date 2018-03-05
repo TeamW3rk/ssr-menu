@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "webpack -d --watch",
-    "seed": "node ./database/seed.js",
+    "seed": "node ./database/index.js",
     "server": "nodemon server/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -34,6 +34,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-jest": "^22.4.1",
+    "bluebird": "^3.5.1",
     "enzyme-to-json": "^3.3.1",
     "express": "^4.16.2",
     "faker": "^4.1.0",

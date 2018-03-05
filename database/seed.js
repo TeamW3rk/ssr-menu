@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const faker = require('faker');
-const Promise = require('bluebird');
 const helper = require('./helper');
 
 const sequelize = new Sequelize('menus', 'Joe', '', {
@@ -46,9 +45,8 @@ sequelize
     }
   });
 
-module.exports = {
-  
-};
+// module.exports = {
+// };
 
 // attempt to make relational schemas
 

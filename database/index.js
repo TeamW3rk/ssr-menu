@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const helper = require("./helper");
 
 const sequelize = new Sequelize("menus", "Joe", "", {
   host: "localhost",
@@ -6,25 +7,11 @@ const sequelize = new Sequelize("menus", "Joe", "", {
   dialect: "postgres"
 });
 
-const RestaurantMenuItems = sequelize.define("RestaurantMenuItems", {
-  restaurantId: Sequelize.INTEGER,
-  menuName: Sequelize.TEXT,
-  menuCategoryName: Sequelize.TEXT,
-  menuItemName: Sequelize.TEXT,
-  menuItemDescription: Sequelize.TEXT,
-  menuItemPrice: Sequelize.DECIMAL
-});
-
-let fetchRestaurantMenuItems = function(id, cb) {
-   RestaurantMenuItems.findAll({
-    where: {
-      restaurantId: id
-    }
+//overwrites current data and stores new
+sequelize
+  .sync({
+    force: true
   })
-  .then((data) => cb(data))
-  .catch((err) => {throw err});
-};
-
-module.exports = {
-  fetch: fetchRestaurantMenuItems
-}
+  .then(() => {
+    helper.create();
+  });
