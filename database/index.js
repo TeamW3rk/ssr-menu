@@ -1,16 +1,16 @@
-const Sequelize = require("sequelize");
-const helper = require("./helper");
+const Sequelize = require('sequelize');
+const helper = require('./helper');
 
-const sequelize = new Sequelize("menus", "Joe", "", {
-  host: "localhost",
+const sequelize = new Sequelize('menus', 'Joe', '', {
+  host: 'localhost',
   port: 5554,
-  dialect: "postgres"
+  dialect: 'postgres',
 });
 
-//overwrites current data and stores new
+// overwrites current data and stores new
 sequelize
   .sync({
-    force: true
+    force: true,
   })
   .then(() => {
     helper.create();

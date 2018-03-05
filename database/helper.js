@@ -68,7 +68,8 @@ function fetchRestaurantMenuItems(id, cb) {
     .catch((err) => {
       throw err;
     });
-} 
+}
+
 module.exports = {
   create: createRestaurantData,
   fetch: fetchRestaurantMenuItems,
