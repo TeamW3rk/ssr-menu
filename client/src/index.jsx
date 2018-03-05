@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurantID: 1,
+      restaurantID: '',
       restaurantMenus: ['Breakfast', 'Lunch', 'Dinner'],
       restaurantMenuCategories: ['Appetizers', 'Mains', 'Sides', 'Beverages'],
       restaurantMenuItems: [],
@@ -19,38 +19,38 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.getRandomID();
+    this.handleRestaurantID();
   }
   
   componentDidMount() {
     this.fetch();
   }
 
-  getRandomID() {
-    let num =  Math.floor(Math.random() * (200)) + 1;
-    console.log('Restautrant ID: ',num);
-    this.setState({
-      restaurantID: num 
-    })
-  };
-
   fetch() {
+    //fetches data associated with id
     axios
-      .get(`/${this.state.restaurantID}/menu`)
+      .get(`${this.state.restaurantID}menu`)
       .then((restaurantMenu) => {
-        console.log(`Restaurant ${this.state.restaurantID} data fetched`);
+        console.log(`${this.state.restaurantID} data fetched`);
         console.log(restaurantMenu.data);
-
         this.setState({ 
           restaurantMenuItems: restaurantMenu.data,
           updatedAt: restaurantMenu.data[0].updatedAt.slice(0, 10)
-         });
-         //first menu to show on load
-        this.handleMenuClick("Breakfast");
+          });
+          //first menu to show on page reload
+        this.handleMenuClick(this.state.restaurantMenus[0]);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error.response.data);
       });
+  }
+
+  handleRestaurantID() {
+    //grabs id from url
+    let id = window.location.pathname;
+    this.setState({
+      restaurantID: id
+    });
   }
 
   handleMenuState(organizedMenu) {
@@ -58,10 +58,10 @@ class App extends React.Component {
   }
   
   handleMenuClick(menu) {
-    //updates state with selected menu
+    //updates state with selected menu button
     let callback = this.handleMenuState.bind(this);
     let selectedMenu = this.filterRestaurantData(menu, callback);
-    console.log(menu,'was selected');
+    console.log(menu,'menu was selected');
   }
   
   filterRestaurantData(menu, cb) {
@@ -78,7 +78,7 @@ class App extends React.Component {
   }
 
   organizeMenuData(menu, cb) {
-    //orders filted menu list by category name
+    //orders filtered menu list by category name
     let restaurantMenu = [];
     let categoryNames = this.state.restaurantMenuCategories;
 

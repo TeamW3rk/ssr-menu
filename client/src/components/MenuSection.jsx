@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import MenuCategory from './MenuCategory.jsx';
 
 const MenuSection = (props) => (
