@@ -34,30 +34,6 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// creating fake restaurant data
-const menuNames = ['Breakfast', 'Lunch', 'Dinner'];
-
-const menuCategoryNames = ['Appetizers', 'Mains', 'Sides', 'Beverages'];
-
-function createRestaurantData() {
-  for (let i = 1; i <= 200; i += 1) {
-    for (let j = 0; j < menuNames.length; j += 1) {
-      for (let k = 0; k < menuCategoryNames.length; k += 1) {
-        for (let l = 1; l <= getRandomIntInclusive(5, 10); l += 1) {
-          RestaurantMenuItems.create({
-            restaurantId: i,
-            menuName: menuNames[j],
-            menuCategoryName: menuCategoryNames[k],
-            menuItemName: capitalizeFirstLetter(faker.lorem.words()),
-            menuItemDescription: faker.lorem.sentence().toLowerCase(),
-            menuItemPrice: getRandomPrice(),
-          });
-        }
-      }
-    }
-  }
-}
-
 function fetchRestaurantMenuItems(id, cb) {
   RestaurantMenuItems.findAll({
     where: {
@@ -71,6 +47,8 @@ function fetchRestaurantMenuItems(id, cb) {
 }
 
 module.exports = {
-  create: createRestaurantData,
   fetch: fetchRestaurantMenuItems,
+  randomInt: getRandomIntInclusive,
+  randomPrice: getRandomPrice,
+  capFirstLet: capitalizeFirstLetter,
 };
