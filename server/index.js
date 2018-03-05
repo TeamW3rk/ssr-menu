@@ -10,7 +10,7 @@ app.use('/r', router);
 app.get("*", (req, res) => {
   res.status(404).send('Invalid URL');
 });
-  
+
 let port = 6600;
 
 app.listen(port, () => console.log(`Server is listening on ${port}`));

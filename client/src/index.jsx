@@ -41,7 +41,7 @@ class App extends React.Component {
         this.handleMenuClick(this.state.restaurantMenus[0]);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error.response.data);
       });
   }
 
