@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
 const db = require('../database/helper.js');
+const bodyParser = require('body-parser');
 
 const router = express.Router();
 
 router.use('/:id', express.static(path.join(__dirname, '/../client/dist')));
+router.use(bodyParser.json());
 
 router.get('/:id/menu', (req, res) => {
   const { id } = req.params;

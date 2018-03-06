@@ -6,6 +6,15 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
+  next();
+});
+
 app.use('/r', router);
 
 app.get('*', (req, res) => {
@@ -15,3 +24,5 @@ app.get('*', (req, res) => {
 const port = 6600;
 
 app.listen(port, () => console.log(`Server is listening on ${port}`));
+
+module.exports = app;
