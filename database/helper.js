@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-const faker = require('faker');
 
 const sequelize = new Sequelize('menus', 'Joe', '', {
   host: 'localhost',
