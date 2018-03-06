@@ -6,6 +6,7 @@ module.exports = {
     "no-undef": "off",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "react/prop-types": 0,
+    "no-unused-vars": "off",
   },
   env: { browser: true }
 };

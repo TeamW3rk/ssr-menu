@@ -20,7 +20,7 @@
     "server": "nodemon server/index.js",
     "test": "jest --forceExit",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage --forceExit"
   },
   "jest": {
     "verbose": true,
