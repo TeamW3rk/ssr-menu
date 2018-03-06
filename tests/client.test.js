@@ -75,3 +75,16 @@ describe('MenuCategory component tests', () => {
     expect(wrapper.find(MenuItem).length).toEqual(1);
   });
 });
+
+describe('MenuItem component tests', () => {
+  const wrapper = shallow(<MenuItem menuItem={{ menuItemName: 'poop', menuItemPrice: 2.95, menuItemDescription: 'it stinks' }} />);
+  test('should render the menu item title from props', () => {
+    expect(wrapper.find('div.menu-item-title').text()).toEqual('poop$2.95');
+  });
+  test('should render the menu item price prop', () => {
+    expect(wrapper.find('div.menu-item-price').text()).toEqual('$2.95');
+  });
+  test('should render the menu item description prop', () => {
+    expect(wrapper.find('p').text()).toEqual('it stinks');
+  });
+});
