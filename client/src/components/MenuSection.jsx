@@ -1,7 +1,7 @@
 import React from 'react';
-import MenuCategory from './MenuCategory.jsx';
+import MenuCategory from './MenuCategory';
 
-const MenuSection = (props) => (
+const MenuSection = props => (
   <div>
     {props.menuCategories.map(category => 
       <MenuCategory menuCategory={category} />)}

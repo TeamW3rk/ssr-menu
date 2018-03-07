@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './Button.jsx';
+import Button from './Button';
 
 class MenuButtons extends React.Component {
   constructor(props) {
@@ -8,18 +8,20 @@ class MenuButtons extends React.Component {
   }
 
   handleMenuClick(menu) {
-   this.props.menuClick(menu);
+    this.props.menuClick(menu);
   }
 
   render() {
-    return <div>
+    return (
+      <div>
         {this.props.menuNames.map(menuName => (
           <Button
             menuClick={() => this.handleMenuClick(menuName)}
             menuName={menuName}
           />
         ))}
-      </div>;
+      </div>
+    );
   }
 }
 

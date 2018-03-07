@@ -15,16 +15,17 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "webpack -d --watch",
-    "seed": "node ./database/seed.js",
-    "server": "nodemon server/index.js",
-    "test": "jest",
+    "webpack": "webpack -d --watch",
+    "seed": "node ./database/index.js --forceExit",
+    "start": "nodemon server/index.js",
+    "test": "jest --forceExit",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage --forceExit"
   },
   "jest": {
+    "verbose": true,
     "setupFiles": [
-      "./src/jest-setup.js"
+      "./tests/test-setup.js"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
@@ -33,6 +34,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-jest": "^22.4.1",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
     "enzyme-to-json": "^3.3.1",
     "express": "^4.16.2",
     "faker": "^4.1.0",
@@ -61,6 +64,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.2",
+    "supertest": "^3.0.0",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
     "webpack-dev-server": "^3.0.0"
