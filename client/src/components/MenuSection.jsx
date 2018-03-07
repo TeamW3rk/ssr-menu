@@ -3,7 +3,7 @@ import MenuCategory from './MenuCategory';
 
 const MenuSection = props => (
   <div>
-    {props.menuCategories.map(category => 
+    {props.menuCategories.map(category =>
       <MenuCategory menuCategory={category} />)}
   </div>
 );

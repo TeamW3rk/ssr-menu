@@ -16,8 +16,14 @@
 
 ## Usage
 
-- From the root directory, run npm start in the terminal to start the server.
-- 
+- Install PostgreSQL with the terminal command brew install postgresql
+- In the terminal, run pg_ctl -D /usr/local/var/postgres start to start up Postgres.
+- To create the database 'menus', run createdb menus.
+- Go to database/index.js and helper.js.
+- Change the 'const user' to your psql user name.
+- To seed data into the 'menus' database, run npm run seed.
+- In a different terminal, on the root directory, run npm run server in the terminal to start the server.
+- Go to 'localhost:6600/r/(number btwn 1 - 200)' to see the rendered menu.
 
 ## Requirements
 

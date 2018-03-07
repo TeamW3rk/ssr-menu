@@ -5,7 +5,7 @@ import MenuButtons from '../client/src/components/MenuButtons';
 import MenuCategory from '../client/src/components/MenuCategory';
 import MenuItem from '../client/src/components/MenuItem';
 import MenuSection from '../client/src/components/MenuSection';
-import App from '../client/src/index';
+import App from '../client/src/components/App';
 
 
 describe('App component tests', () => {
