@@ -2,9 +2,9 @@ const Sequelize = require('sequelize');
 const helper = require('./helper');
 const faker = require('faker');
 
-const sequelize = new Sequelize('test', 'Joe', '', {
+const sequelize = new Sequelize('menus', 'Joe', '', {
   host: 'localhost',
-  // port is only needed with the Postgres App
+  // comment out port if not using Postgres.app
   port: 5554,
   dialect: 'postgres',
 });

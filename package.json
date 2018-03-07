@@ -17,7 +17,8 @@
   "scripts": {
     "webpack": "webpack -d --watch",
     "seed": "node ./database/index.js --forceExit",
-    "start": "nodemon server/index.js",
+    "server": "nodemon server/index.js",
+    "start": "npm run server & npm run webpack",
     "test": "jest --forceExit",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --forceExit"

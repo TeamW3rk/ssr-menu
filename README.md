@@ -16,8 +16,10 @@
 
 ## Usage
 
-- From the root directory, run npm start in the terminal to start the server.
-- 
+- Install PostgreSQL with the terminal command brew install postgresql
+- From the root directory, run npm run server in the terminal to start the server.
+- Go to database/index.js and find the comment about the port.
+- To seed data into PostgreSQL, in the terminal, run createdb menus and then run psql menus
 
 ## Requirements
 
