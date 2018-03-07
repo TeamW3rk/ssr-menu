@@ -17,9 +17,13 @@
 ## Usage
 
 - Install PostgreSQL with the terminal command brew install postgresql
-- From the root directory, run npm run server in the terminal to start the server.
-- Go to database/index.js and find the comment about the port.
-- To seed data into PostgreSQL, in the terminal, run createdb menus and then run psql menus
+- In the terminal, run pg_ctl -D /usr/local/var/postgres start to start up Postgres.
+- To create the database 'menus', run createdb menus.
+- Go to database/index.js and helper.js.
+- Change the 'const user' to your psql user name.
+- To seed data into the 'menus' database, run npm run seed.
+- In a different terminal, on the root directory, run npm run server in the terminal to start the server.
+- Go to 'localhost:6600/r/(number btwn 1 - 200)' to see the rendered menu.
 
 ## Requirements
 
