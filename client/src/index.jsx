@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Menu from './components/App';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+// export default ReactDOM.render(<Menu />, document.getElementById('menu'));
+
+
+window.Menu = Menu;
+// export default Menu;

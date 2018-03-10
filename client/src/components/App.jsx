@@ -7,7 +7,7 @@ import CONFIG from '../config.client';
 const ENV = window.ENV = 'TEST'; // Define current enironment
 const PATH = (window.PATH = CONFIG[ENV].HOST + ':' + CONFIG[ENV].PORT);
 
-class App extends React.Component {
+class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -114,5 +114,5 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
+// window.Menu = Menu;
+export default Menu;
