@@ -39,7 +39,7 @@ const seedDB = function () {
     })
     .then(() => {
       async function recurse(first, second) {
-      if(second < ((101000/numCPUs) * id)) {
+      if(second < ((104000/numCPUs) * id) + 1) {
  
         try{
         await createRestaurantData(first, second);
@@ -47,17 +47,17 @@ const seedDB = function () {
         catch(error) {
           console.error(error);
         }
-        recurse(first + 500, second + 500);
+        recurse(first + 1000, second + 1000);
       }
       return;
     }
 
-      recurse((id - 1) * (101000/numCPUs) + 1,  ((id - 1) * (101000/numCPUs) + 1) + 500);
+      recurse((id - 1) * (104000/numCPUs) + 1,  ((id - 1) * (104000/numCPUs) + 1) + 1000);
     });
 };
 
 if (cluster.isMaster) {
-  console.log(`Master ${process.pid} is running`);
+  //console.log(`Master ${process.pid} is running`);
 
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
@@ -65,11 +65,12 @@ if (cluster.isMaster) {
   }
 
   cluster.on('exit', (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} finished`);
+    console.log(`finished in ${new Date()}`)
+    //console.log(`worker ${worker.process.pid} finished`);
   });
 } else {
   seedDB();
-  console.log(`Worker ${process.pid} started`);
+  //console.log(`Worker ${process.pid} started`);
 }
 
 
@@ -96,7 +97,6 @@ function createRestaurantData(start, end) {
   return RestaurantMenuItems.bulkCreate(array);
 }
 
-
-
-// module.exports.create = createRestaurantData;
-
+// sequelize.sync({force: false,}).then(() => {
+//   createRestaurantData(1,1);
+// })
