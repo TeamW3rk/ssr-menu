@@ -1,7 +1,10 @@
 const Sequelize = require('sequelize');
 const helper = require('./helper');
 const faker = require('faker');
-
+const Promise = require('bluebird');
+const cluster = require('cluster');
+const http = require('http');
+const numCPUs = require('os').cpus().length;
 // const user = 'Joe';
 
 const sequelize = new Sequelize('menus', 'postgres', 'postgres', {
@@ -9,6 +12,7 @@ const sequelize = new Sequelize('menus', 'postgres', 'postgres', {
   // uncomment port if using Postgres.app
   port: 5432,
   dialect: 'postgres',
+  logging: false,
 });
 
 const menuNames = ['Breakfast', 'Lunch', 'Dinner'];
@@ -26,22 +30,57 @@ const RestaurantMenuItems = sequelize.define('RestaurantMenuItems', {
 
 // creates restaurant data
 
-const pushableArray = [];
+const seedDB = function () {
+  const id = cluster.worker.id;
+
+  sequelize
+    .sync({
+      force: false,
+    })
+    .then(() => {
+      async function recurse(first, second) {
+      if(second < ((101000/numCPUs) * id)) {
+ 
+        try{
+        await createRestaurantData(first, second);
+        }
+        catch(error) {
+          console.error(error);
+        }
+        recurse(first + 500, second + 500);
+      }
+      return;
+    }
+
+      recurse((id - 1) * (101000/numCPUs) + 1,  ((id - 1) * (101000/numCPUs) + 1) + 500);
+    });
+};
+
+if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
+
+  // Fork workers.
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} finished`);
+  });
+} else {
+  seedDB();
+  console.log(`Worker ${process.pid} started`);
+}
+
 
 function createRestaurantData(start, end) {
-// 1041
+  const array = [];
+
   for (let i = start; i <= end; i += 1) {
     for (let j = 0; j < menuNames.length; j += 1) {
       for (let k = 0; k < menuCategoryNames.length; k += 1) {
         for (let l = 1; l <= 9; l += 1) {
           const obj = {};
-          // RestaurantMenuItems.create({
-          //   restaurantId: i,
-          //   menuName: menuNames[j],
-          //   menuCategoryName: menuCategoryNames[k],
-          //   menuItemName: helper.capFirstLet(faker.lorem.words()),
-          //   menuItemDescription: faker.lorem.sentence().toLowerCase(),
-          //   menuItemPrice: helper.randomPrice(),
           obj.restaurantId = i;
           obj.menuName = menuNames[j];
           obj.menuCategoryName = menuCategoryNames[k];
@@ -49,33 +88,15 @@ function createRestaurantData(start, end) {
           obj.menuItemDescription = faker.lorem.sentence().toLowerCase();
           obj.menuItemName = helper.capFirstLet(faker.lorem.words());
           obj.menuItemPrice = helper.randomPrice();
-          pushableArray.push(obj);
+          array.push(obj);
         }
       }
     }
   }
+  return RestaurantMenuItems.bulkCreate(array);
 }
 
 
-// overwrites current data and stores new
-sequelize
-  .sync({
-    force: false,
-  })
-  .then(() => {
-    // createRestaurantData();
-    async function asyncCall() {
-      let start = 1;
-      let end = 1041;
-
-      while (end < 10000) {
-        await createRestaurantData(start, end);
-        start += end;
-        end += 1041;
-      }
-    }
-    asyncCall();
-  });
 
 // module.exports.create = createRestaurantData;
 
