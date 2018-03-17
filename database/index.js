@@ -7,7 +7,9 @@ const http = require('http');
 const numCPUs = require('os').cpus().length;
 // const user = 'Joe';
 
-const sequelize = new Sequelize('menus', 'postgres', 'postgres', {
+var time = new Date().getTime();
+
+const sequelize = new Sequelize('test', 'postgres', 'postgres', {
   host: 'localhost',
   // uncomment port if using Postgres.app
   port: 5432,
@@ -39,7 +41,7 @@ const seedDB = function () {
     })
     .then(() => {
       async function recurse(first, second) {
-      if(second < ((104000/numCPUs) * id) + 1) {
+      if(second < ((10400/numCPUs) * id) + 1) {
  
         try{
         await createRestaurantData(first, second);
@@ -47,12 +49,13 @@ const seedDB = function () {
         catch(error) {
           console.error(error);
         }
-        recurse(first + 1000, second + 1000);
+        recurse(first + 100, second + 100);
       }
+      console.log('done in ', (new Date().getTime() - time) / 1000, 's :3 ^_^ <3 <(^_^<)');
       return;
     }
 
-      recurse((id - 1) * (104000/numCPUs) + 1,  ((id - 1) * (104000/numCPUs) + 1) + 1000);
+      recurse((id - 1) * (10400/numCPUs) + 1,  ((id - 1) * (10400/numCPUs) + 1) + 100);
     });
 };
 
@@ -66,10 +69,11 @@ if (cluster.isMaster) {
 
   cluster.on('exit', (worker, code, signal) => {
     console.log(`finished in ${new Date()}`)
+    console.log('done in ', (new Date().getTime() - time) / 1000, 's :3 ^_^ <3 <(^_^<)');
     //console.log(`worker ${worker.process.pid} finished`);
   });
 } else {
-  seedDB();
+  // seedDB();
   //console.log(`Worker ${process.pid} started`);
 }
 
@@ -97,6 +101,6 @@ function createRestaurantData(start, end) {
   return RestaurantMenuItems.bulkCreate(array);
 }
 
-// sequelize.sync({force: false,}).then(() => {
-//   createRestaurantData(1,1);
-// })
+sequelize.sync({force: false,}).then(() => {
+  createRestaurantData(1,1);
+})
