@@ -36,7 +36,7 @@ const seedDB = function () {
   const id = cluster.worker.id;
 
   sequelize
-    .sync({
+    .sync({ 
       force: false,
     })
     .then(() => {
