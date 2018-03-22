@@ -5,13 +5,11 @@ const Promise = require('bluebird');
 const cluster = require('cluster');
 const http = require('http');
 const numCPUs = require('os').cpus().length;
-// const user = 'Joe';
 
-var time = new Date().getTime();
+const time = new Date().getTime();
 
 const sequelize = new Sequelize('test', 'postgres', 'postgres', {
   host: 'localhost',
-  // uncomment port if using Postgres.app
   port: 5432,
   dialect: 'postgres',
   logging: false,
@@ -30,51 +28,42 @@ const RestaurantMenuItems = sequelize.define('RestaurantMenuItems', {
   menuItemPrice: Sequelize.DECIMAL,
 });
 
-// creates restaurant data
-
 const seedDB = function () {
   const id = cluster.worker.id;
 
   sequelize
-    .sync({ 
+    .sync({
       force: false,
     })
     .then(() => {
       async function recurse(first, second) {
-      if(second < ((10400/numCPUs) * id) + 1) {
- 
-        try{
-        await createRestaurantData(first, second);
+        if (second < ((104000 / numCPUs) * id) + 1) {
+          try {
+            await createRestaurantData(first, second);
+          } catch (error) {
+            console.error(error);
+          }
+          recurse(first + 1000, second + 1000);
         }
-        catch(error) {
-          console.error(error);
-        }
-        recurse(first + 100, second + 100);
       }
-      console.log('done in ', (new Date().getTime() - time) / 1000, 's :3 ^_^ <3 <(^_^<)');
-      return;
-    }
 
-      recurse((id - 1) * (10400/numCPUs) + 1,  ((id - 1) * (10400/numCPUs) + 1) + 100);
+      recurse((id - 1) * (104000 / numCPUs) + 1, ((id - 1) * (104000 / numCPUs) + 1) + 1000);
     });
 };
 
 if (cluster.isMaster) {
-  //console.log(`Master ${process.pid} is running`);
-
-  // Fork workers.
+  console.log(`Master ${process.pid} is running`);
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
 
   cluster.on('exit', (worker, code, signal) => {
-    console.log(`finished in ${new Date()}`)
     console.log('done in ', (new Date().getTime() - time) / 1000, 's :3 ^_^ <3 <(^_^<)');
-    //console.log(`worker ${worker.process.pid} finished`);
+    console.log(`worker ${worker.process.pid} finished`);
   });
 } else {
-  // seedDB();
-  //console.log(`Worker ${process.pid} started`);
+  seedDB();
+  console.log(`Worker ${process.pid} started`);
 }
 
 
@@ -101,6 +90,5 @@ function createRestaurantData(start, end) {
   return RestaurantMenuItems.bulkCreate(array);
 }
 
-sequelize.sync({force: false,}).then(() => {
-  createRestaurantData(1,1);
-})
+module.exports.RestaurantMenuItems = RestaurantMenuItems;
+
