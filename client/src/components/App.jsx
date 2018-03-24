@@ -35,13 +35,18 @@ class Menu extends React.Component {
       .get(`${PATH}${this.state.restaurantID}menu`)
       .then((restaurantMenu) => {
         console.log(`${this.state.restaurantID} data fetched`);
-        console.log(restaurantMenu.data);
+        console.log('this is restaurantmenudata ->', restaurantMenu.data);
+        let test = restaurantMenu.data;
+        this.state.restaurantMenuItems = test; 
+        console.log('this is test ->', test)
         this.setState({
-          restaurantMenuItems: restaurantMenu.data,
-          updatedAt: restaurantMenu.data[0].updatedAt.slice(0, 10),
+          // restaurantMenuItems: test, 
+          updatedAt: 0,
         });
+        // console.log('state looks like this', this.state)
         // first menu to show on page reload
         this.handleMenuClick(this.state.restaurantMenus[0]);
+       // console.log('state looks like this', this.state)
       })
       .catch((error) => {
         console.error(error.response.data);
@@ -65,18 +70,21 @@ class Menu extends React.Component {
     const callback = this.handleMenuState.bind(this);
     this.filterRestaurantData(menu, callback);
     console.log(menu, 'menu was selected');
+    console.log('state looks like this', this.state)
   }
 
   filterRestaurantData(menu, cb) {
     // filters restaurants menu items to selected menu
-    const { restaurantMenuItems } = this.state;
-    const filteredMenu = [];
+    let  restaurantMenuItems  = this.state.restaurantMenuItems;
+    let filteredMenu = [];
 
     for (let i = 0; i < restaurantMenuItems.length; i += 1) {
-      if (restaurantMenuItems[i].menuName === menu) {
+      if (restaurantMenuItems[i].menuname === menu) {
+
         filteredMenu.push(restaurantMenuItems[i]);
       }
     }
+    
     this.organizeMenuData(filteredMenu, cb);
   }
 
@@ -84,16 +92,16 @@ class Menu extends React.Component {
     // orders filtered menu list by category name
     const restaurantMenu = [];
     const categoryNames = this.state.restaurantMenuCategories;
-
     for (let x = 0; x < categoryNames.length; x += 1) {
       const category = [];
       for (let y = 0; y < menu.length; y += 1) {
-        if (menu[y].menuCategoryName === categoryNames[x]) {
+        if (menu[y].menucategorynames === categoryNames[x]) {
           category.push(menu[y]);
         }
       }
       restaurantMenu.push(category);
     }
+    console.log('this is restaurant menu', restaurantMenu);
     cb(restaurantMenu);
   }
 

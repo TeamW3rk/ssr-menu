@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const router = require('./router.js');
 const app = express();
+const nr = require('newrelic');
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 

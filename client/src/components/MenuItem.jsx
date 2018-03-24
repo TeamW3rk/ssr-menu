@@ -3,12 +3,12 @@ import React from 'react';
 const MenuItem = props => (
   <div className="menu-item">
     <div className="menu-item-title">
-      {props.menuItem.menuItemName}
+      {props.menuItem.menuitemname}
       <div className="menu-item-price">
-        ${props.menuItem.menuItemPrice}
+        ${props.menuItem.menuitemprice}
       </div>
     </div>
-    <p className="menu-item-desc">{props.menuItem.menuItemDescription}</p>
+    <p className="menu-item-desc">{props.menuItem.menuitemdescription}</p>
   </div>
 );
 

@@ -1,5 +1,4 @@
 const cassandra = require('cassandra-driver');
-const async = require('async');
 const helper = require('./helper');
 const faker = require('faker');
 const numCPUs = require('os').cpus().length;

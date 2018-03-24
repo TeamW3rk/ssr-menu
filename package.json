@@ -16,7 +16,7 @@
   },
   "scripts": {
     "webpack": "webpack -d --watch",
-    "seed": "node ./database/index.js --forceExit",
+    "seed": "node ./database/cassandraSeed.js --forceExit",
     "server": "nodemon server/index.js",
     "start": "npm run server & npm run webpack",
     "test": "jest --forceExit",
@@ -33,6 +33,9 @@
     ]
   },
   "dependencies": {
+    "artillery": "^1.6.0-14",
+    "ascii-progress": "^1.0.5",
+    "async": "^2.6.0",
     "axios": "^0.18.0",
     "babel-jest": "^22.4.1",
     "bluebird": "^3.5.1",
@@ -41,9 +44,12 @@
     "enzyme-to-json": "^3.3.1",
     "express": "^4.16.2",
     "faker": "^4.1.0",
+    "newrelic": "^3.2.0",
+    "nodejs-dashboard": "^0.4.3",
     "nodemon": "^1.15.1",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
+    "pg-promise": "^8.2.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.1.3",

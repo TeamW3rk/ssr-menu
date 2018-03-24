@@ -66,7 +66,6 @@ if (cluster.isMaster) {
   console.log(`Worker ${process.pid} started`);
 }
 
-
 function createRestaurantData(start, end) {
   const array = [];
 
