@@ -69,7 +69,7 @@ if (cluster.isMaster) {
 function createRestaurantData(start, end) {
   const array = [];
 
-  for (let i = start; i <= end; i += 1) {
+  for (let i = start; i <= end; i += 1) { 
     for (let j = 0; j < menuNames.length; j += 1) {
       for (let k = 0; k < menuCategoryNames.length; k += 1) {
         for (let l = 1; l <= 9; l += 1) {

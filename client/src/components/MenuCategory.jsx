@@ -1,9 +1,8 @@
 import React from 'react';
-import MenuItem from './MenuItem';
+import MenuItem from './MenuItem.jsx';
 
 const MenuCategory = props => (
   <div>
-    {console.log('props in menu category was', props)}
     <h3 className="menu-category-title">{props.menuCategory[0].menucategorynames}</h3>
     <div className="menu-category">
       {props.menuCategory.map(item => <MenuItem menuItem={item} />)}

@@ -21,7 +21,7 @@ let time = new Date().getTime();
 
 RestaurantMenuItems.findOne({
   where: {
-    restaurantId: 10049,
+    restaurantId: 3000000,
   },
 }).then((results) => {
   console.log(results);

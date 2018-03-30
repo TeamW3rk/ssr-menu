@@ -4,7 +4,7 @@ const router = require('./router.js');
 const app = express();
 const nr = require('newrelic');
 
-app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(express.static(path.join(__dirname, '/../public')));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');

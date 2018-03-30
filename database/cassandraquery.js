@@ -5,10 +5,10 @@ const time = new Date().getTime();
 const fetch = function (id, callback) {
   const query = `SELECT * FROM test.restaurantmenuitems WHERE restaurantid = ${id} ALLOW FILTERING;`
    client.execute(query).then((result) => {
-    // console.log(result.rows);
-    console.log(result.rows)
      callback(result.rows);
   });
 };
+
+
 
 module.exports.fetch = fetch;

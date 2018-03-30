@@ -1,9 +1,8 @@
 import React from 'react';
-import MenuCategory from './MenuCategory';
+import MenuCategory from './MenuCategory.jsx';
 
 const MenuSection = props => (
   <div>
-    {console.log('props in menu section was -> ', props)}
     {props.menuCategories.map(category =>
       <MenuCategory menuCategory={category} />)}
   </div>
